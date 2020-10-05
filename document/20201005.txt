@@ -1,0 +1,11 @@
+scope 테스트 시나리오
+1. http://localhost/scopeServlet으로 get요청
+2. ScopeServlet.doGet 메서드에서 요청처리
+	- request, session, application scope에 각각 값을 저장
+	- 응답을 scpoeView.jsp에서 처리하도록 위임(forward)
+3. scopeView.jsp에서 request, session, application 각 영역에 저장된 속성값을
+	화면에 표시
+ 
+4. 브라우저를 달리하여 scopeView.jsp를 요청
+	- 값이 어떻게 달라지는지 확인
+	
