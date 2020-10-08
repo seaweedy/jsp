@@ -19,8 +19,10 @@
 
     <!-- Custom styles for this template -->
     <link href="<%=request.getContextPath()%>/css/signin.css" rel="stylesheet">
+    <script type ="text/javascript" src="<%=request.getContextPath()%>/js/js.cookie-2.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    	function getCookieValue(cookieName){
+    	function getCookieValue(cookieName){ // 쿠키 값을 가져오는 메서드
         	cookies = document.cookie.split("; ")
         	for(i = 0; i < cookies.length; i ++){
 				cookie = cookies[i].split("=")
@@ -33,8 +35,43 @@
 // 					}
 // 				}
         	}
+        	return "";	
         }
-    
+        
+        function setCookie(cookieName, cookieValue, expires){ // expires는 현재 날짜에서 며칠 뒤 
+			var today = new Date(); // expires를 위한 객체생성
+			// 현재 날짜에서 미래로 + expires 만큼 더한 날짜 구하기
+			today.setDate(today.getDate() + expires);
+			document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
+			console.log(document.cookie);
+        }
+
+        function deleteCookie(cookieName){
+            // 해당쿠키의 expires속성을 과거 날짜로 변경
+			setCookie(cookieName,"",-1) // 쿠키 설정 메서드를 호출하여 -1 대입
+        }
+
+        $(function(){
+            if(Cookies.get("REMEMBERME")=="Y"||Cookies.get("REMEMBERME")=="y"){
+//         	if(getCookieValue("REMEMBERME")=="Y"||getCookieValue("REMEMBERME")=="y"){ // REMEMBERME가 Y일때 
+//             	var userid = getCookieValue("USERID");
+            	var userid = Cookies.get("USERID");
+            	$('#inputEmail').val(userid);
+            	$('input:checkbox').prop('checked', true);
+            	//$('input:checkbox').attr('checked', 'checked');
+        	}
+
+        	$('#btn').on('click',function(){
+	        	if($('input:checkbox').prop('checked')== true){ // 체크박스 체크 시
+		        	Cookies.set("REMEMBERME","Y"); // Y로 변경
+		        	Cookies.set("USERID",$('#inputEmail').val()); // 입력한 아이디를 쿠키에 저장
+	        	}else{
+	        		Cookies.set("REMEMBERME","N"); // N로 변경
+		        	Cookies.remove("USERID");
+		       	}
+	           	$('.form-signin').submit();
+            })
+        })
     </script>
   </head>
 
@@ -42,18 +79,18 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="<%=request.getContextPath()%>/login" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name = "userId" class="form-control" placeholder="Email address" required autofocus value = "brown">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name = "password" class="form-control" placeholder="Password" required value = "passBrown">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button id="btn" class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
       </form>
 
     </div> <!-- /container -->

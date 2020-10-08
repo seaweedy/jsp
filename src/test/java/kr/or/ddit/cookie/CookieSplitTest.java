@@ -9,18 +9,30 @@ import org.slf4j.LoggerFactory;
 public class CookieSplitTest {
 
 	@Test
-	public void test() {
-		final Logger logger = LoggerFactory.getLogger(CookieSplitTest.class);
+	public void getCookieValueSuccessTest() {
 		/***Given***/
-		String cookieString = "USERID=brown; REMEMBERME=Y; TEST=T; ";
 		CookieSplit cookiesplit = new CookieSplit();
+		final Logger logger = LoggerFactory.getLogger(CookieSplitTest.class); // 로그객체
 
 		/***When***/
-		String result = cookiesplit.getCookieValue("USERID");
-		logger.debug("{}".format(result));
+		String result = cookiesplit.getCookieValue("REMEMBERME"); // 예시되는 값 입력
+		logger.debug("{}".format(result)); // 로그확인
 
 		/***Then***/
-		assertEquals(result, "brown");
+		assertEquals(result, "Y"); // 기대한 값과 동일한지 확인
+		assertNotNull(result); // 기대한 값이 널이 ㅇ아닌지
+	}
+	
+	@Test
+	public void getCookieValueFailureTest() {
+		/***Given***/
+		CookieSplit cookiesplit = new CookieSplit();
+		
+		/***When***/
+		String result = cookiesplit.getCookieValue("PASSWORD"); // 예시되는 값 입력
+		
+		/***Then***/
+		assertEquals(result, ""); // 기대한 값과 동일한지 확인
 	}
 
 }
