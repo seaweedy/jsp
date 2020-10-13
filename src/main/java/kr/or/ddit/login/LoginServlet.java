@@ -16,10 +16,18 @@ import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet { // 로그인 서블렛 객체는 한 번 생성
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+	private MemberServiceI memberService; // 고로 한 번 생성
        
+	
+	@Override
+	public void init() throws ServletException {
+		// service 객체 생성
+		memberService = new MemberService();
+	}
+	
 	// login 화면을 클라이언트에게 응답으로 생성
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -32,7 +40,6 @@ public class LoginServlet extends HttpServlet {
 		
 		logger.debug("userId : {}, password : {}",userId, password);
 		
-		MemberServiceI memberService = new MemberService();
 		MemberVo memberVo = memberService.getMember(userId);
 		
 		// DB에 등록된 회원이 없는 경우 (로그인 페이지) / 비밀번호가 일치하지 않는 경우 (로그인 페이지)
