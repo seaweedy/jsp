@@ -39,9 +39,6 @@ public class MemberDao implements MemberDaoI {
 
 		List<MemberVo> memberList = sqlSession.selectList("member.selectAllMember");
 
-//		sqlSession.commit(); // insert or update or delete는 작성해야함
-//		sqlSession.rollback();
-
 		sqlSession.close();
 
 		return memberList;

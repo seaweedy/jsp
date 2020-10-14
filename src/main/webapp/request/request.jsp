@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel = "stylesheet" href="<%=request.getContextPath() %>/css/public.css">
+<link rel = "stylesheet" href="${pageContext.request.contextPath }/css/public.css">
 </head>
 <body>
 	<%-- 자바언어의 철칙(정적인 언어)

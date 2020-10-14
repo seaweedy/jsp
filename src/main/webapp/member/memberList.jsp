@@ -1,13 +1,17 @@
-<%@page import="kr.or.ddit.jobs.model.JobsVo"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <% List<JobsVo> jobsList = (List<JobsVo>)request.getAttribute("jobsList");%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+
 <title>Jsp</title>
 <%@ include file="/layout/commonLib.jsp" %>
 </head>
@@ -27,21 +31,17 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
-					<th>이름</th>
-					<th>제목</th>
-					<th>최대급여</th>
-					<th>최소급여</th>
-					<th>생성일</th>
-					<th>갱신일</th>
+					<th>사용자 아이디</th>
+					<th>사용자 이름</th>
+					<th>사용자 별명</th>
+					<th>등록일시</th>
 				</tr>
-				<c:forEach items="${jobsList }" var="jobs" > <%-- jstl로 선언하지않고 바로 for문  --%>
+				<c:forEach items="${memberList }" var="member" > <%-- jstl로 선언하지않고 바로 for문  --%>
 					<tr>
-						<td>${jobs.job_id }</td>
-						<td>${jobs.job_title }</td>
-						<td>${jobs.min_salary }</td>
-						<td>${jobs.max_salary }</td>
-						<td>${jobs.create_date }</td>
-						<td>${jobs.update_date }</td>
+						<td>${member.userid }</td>
+						<td>${member.usernm }</td>
+						<td>${member.alias }</td>
+						<td>${member.reg_dt }</td>
 					</tr>
 				</c:forEach>
 			</table>
