@@ -59,7 +59,7 @@ public class ELServlet extends HttpServlet {
 		request.setAttribute("rangers", map);
 		
 		// list 객체를 request 속성에 넣어준다.
-		request.setAttribute("rangersList", memberService.selsectAllmember());
+		request.setAttribute("rangersList", memberService.selectAllMember());
 		
 		request.getRequestDispatcher("/el/el.jsp").forward(request, response);
 	}
