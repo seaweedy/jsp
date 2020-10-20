@@ -58,7 +58,16 @@ public class RequestCounterFilter implements Filter{
 		// 어떤 자료구조를 쓰면 좋을까?
 		// 등록된 다른 필터로 요청을 위임
 		// 더 이상 등록된 Filter가 없을 경우 요청을 처리할 서블릿 / jsp으로 요청을 전달
-		chain.doFilter(request, response);
+		
+		// 전처리 : 요청이 서블릿으로 가기전에 실행되는 부분
+		logger.debug("RequestCounterFilter 전처리 부분 - chain.doFilter 호출전");
+		
+		chain.doFilter(request, response); // servlet 처리
+		
+		logger.debug("RequestCounterFilter 후처리 부분 - chain.doFilter 호출후");
+		
+		// 후처리 : servlet 응답성성 후 응답이 web으로 넘어가는 단계
+		
 	}
 
 	@Override

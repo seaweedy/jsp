@@ -9,12 +9,12 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$('#lang').val("${param.lang == null ? 'ko' : param.lang}");
-	$('#lang').on('change',function(){
-		document.location="/jstl/jstl_fmt.jsp?lang="+ $("#lang").val();
-	})
-})
+// $(document).ready(function(){
+// 	$('#lang').val("${param.lang == null ? 'ko' : param.lang}");
+// 	$('#lang').on('change',function(){
+// 		document.location="/jstl/jstl_fmt.jsp?lang="+ $("#lang").val();
+// 	})
+// })
 </script>
 </head>
 <body>
