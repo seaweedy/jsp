@@ -39,7 +39,7 @@ public class RedirectServlet extends HttpServlet {
 		// 그래서 최종적으로 클라이언트의 주소줄에는 jsp요청에 대한 주소가 남는다
 		// 클라이언트 입장에서는 서버로 요청을 총 두 번 보내게 된다.
 		
-		java.util.List<String> rangers = new ArrayList<>();
+		java.util.List<String> rangers = new ArrayList<>();  
 		rangers.add("brown");		
 		rangers.add("sally");		
 		rangers.add("cony");
