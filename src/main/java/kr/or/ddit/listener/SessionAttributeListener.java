@@ -13,15 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.member.model.MemberVo;
 
-public class SessionAttributeListener implements HttpSessionAttributeListener{
+public class SessionAttributeListener implements HttpSessionAttributeListener{ // session Listener
 	private static final Logger logger = LoggerFactory.getLogger(SessionAttributeListener.class);
 	
-	//          userid, MemberVo
+	//          userid, MemberVo 
 	private Map<String, MemberVo> userMap = new HashMap<String, MemberVo>();
 	
-	
 	@Override
-	public void attributeAdded(HttpSessionBindingEvent event) {
+	public void attributeAdded(HttpSessionBindingEvent event) { // 인자가 listener에 의해 필터링 되는 session
 		if("S_MEMBER".equals(event.getName())) {
 //			HttpSession session = event.getSession();
 //			MemberVo memberVo = (MemberVo)session.getAttribute("S_MEMBER");

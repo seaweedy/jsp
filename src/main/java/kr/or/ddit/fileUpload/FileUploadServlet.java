@@ -31,19 +31,12 @@ public class FileUploadServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.debug("post request.getContentType() : {}", request.getContentType());
+		
 		String userid = request.getParameter("userid");
 		String img = request.getParameter("img");
 		
-//		BufferedReader br = request.getReader();
-//		char[] buffer = new char[512];
-//		while(br.read(buffer) != -1) {
-//			logger.debug("buffer : {}" , buffer);
-//			for(int i = 0; i <buffer.length ; i++) {
-//				System.out.print(buffer[i]);
-//			}
-//		}
-		
+		// jsp에서 넘겨받은 ContentType, userid, img(file)
+		logger.debug("post request.getContentType() : {}", request.getContentType());
 		logger.debug("userid : {}", userid);
 		logger.debug("img : {}", img);
 		
@@ -57,6 +50,16 @@ public class FileUploadServlet extends HttpServlet {
 		
 		imgPart.write("d:\\upload\\" + fileName);
 		imgPart.delete();
+		
+//		BufferedReader br = request.getReader();
+//		char[] buffer = new char[512];
+//		while(br.read(buffer) != -1) {
+//			logger.debug("buffer : {}" , buffer);
+//			for(int i = 0; i <buffer.length ; i++) {
+//				System.out.print(buffer[i]);
+//			}
+//		}
+		
 	}
 
 }
