@@ -12,12 +12,18 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
+<script src="/js/jquery/jquery-1.12.4.js"></script>
 
 <title>Jsp</title>
 <%@ include file="/layout/commonLib.jsp"%>
 
-<script src="/js/jquery/jquery-1.12.4.js"></script>
-
+<script>
+	$(document).ready(function(){
+		$("#profileDownBtn").on("click",function(){
+			document.location="/profileDownload?userid=${memberVo.userid}";
+		})
+	})
+</script>
 </head>
 
 <body>
@@ -31,21 +37,15 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-				<form class="form-horizontal" role="form">
-<!-- 					<div class="form-group"> -->
-<!-- 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label> -->
-<!-- 						<div class="col-sm-10"> -->
-<!-- 							<input type="text" class="form-control" id="userId" name="userId" -->
-<!-- 								placeholder="사용자 아이디"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+				<form id="frm"class="form-horizontal" role="form">
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 <%-- 							<img alt="" src="${cp }/profile/${memberVo.filename}"/> --%>
 							
-							<img alt="" src="${cp }/profileImg?userid=${memberVo.userid }"/>
+							<img alt="" src="${cp }/profileImg?userid=${memberVo.userid }"/><br>
+							<button id="profileDownBtn" type="button" class="btn btn-default">다운로드 : ${memberVo.realfilename }</button>
 						</div>
 					</div>
 					
@@ -105,7 +105,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">사용자 수정</button>
+							<a class="btn btn-default pull-right" href="${cp }/memberUpdate?userid=${memberVo.userid }">사용자 수정</a>
 						</div>
 					</div>
 				</form>

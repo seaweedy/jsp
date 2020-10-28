@@ -20,8 +20,8 @@ public class MemberService implements MemberServiceI {
 	}
 
 	@Override
-	public MemberVo getMember(String userId) {
-		return memberDao.getMember(userId);
+	public MemberVo getMember(String userid) {
+		return memberDao.getMember(userid);
 	}
 
 	@Override
@@ -44,5 +44,22 @@ public class MemberService implements MemberServiceI {
 		
 		return map;
 	}
+
+	@Override
+	public int insertMember(MemberVo memberVo) {
+		return memberDao.insertMember(memberVo);
+	}
+
+	@Override
+	public int deleteMember(String userid) {
+		return memberDao.deleteMember(userid);
+	}
+
+	@Override
+	public int updateMember(MemberVo memberVo) {
+		return memberDao.updateMember(memberVo);
+	}
+	
+	
 
 }

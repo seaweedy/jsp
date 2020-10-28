@@ -6,7 +6,7 @@
   <select id="getMember" parameterType="String" resultType="MemberVo">
 	SELECT *
 	FROM USERS
-	WHERE userid = #{userId}
+	WHERE userid = #{userid}
 	
   </select>
   
@@ -30,4 +30,32 @@
   	SELECT COUNT(*)
   	FROM users
   </select>
+  
+  <insert id="insertMember" parameterType="MemberVo" >
+  	INSERT INTO users
+  	VALUES( #{userid}, #{usernm}, #{pass}, sysdate, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename}, #{realfilename}) 
+  </insert>
+  
+  <delete id="deleteMember" parameterType="String">
+  	DELETE
+  	FROM users
+  	WHERE userid = #{userid}
+  </delete>
+  
+  <update id="updateMember" parameterType="MemberVo">
+  	UPDATE users
+  	SET usernm = #{usernm},
+	  	pass = #{pass},
+	  	reg_dt = sysdate,
+	  	alias = #{alias},
+	  	addr1 = #{addr1},
+	  	addr2 = #{addr2},
+	  	zipcode = #{zipcode},
+	  	filename = #{filename},
+	  	realfilename = #{realfilename}
+  	WHERE userid = #{userid}
+  	
+  </update>
+ 
+  
 </mapper>

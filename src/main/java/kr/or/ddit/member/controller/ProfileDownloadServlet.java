@@ -2,9 +2,9 @@ package kr.or.ddit.member.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +17,9 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
 
-@WebServlet("/profileImg")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/profileDownload")
+@MultipartConfig
+public class ProfileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberServiceI memberService;
 	private static final Logger logger = LoggerFactory.getLogger(ProfileServlet.class);
@@ -35,9 +36,11 @@ public class ProfileServlet extends HttpServlet {
 
 		// 사용자 아이디 파라미터 확인하고
 		String userid = request.getParameter("userid");
-
-		// db에서 사용자 filename확인
 		MemberVo memberVo = memberService.getMember(userid);
+
+		// response content-type 설정 (파일 다운로드를 위한 구문)
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + memberVo.getRealfilename() + "\"");
+		response.setContentType("application/octet-stream");
 
 		// 경로 확인 후 파일 입출력을 통해 응답생성
 		// 파일 읽기
