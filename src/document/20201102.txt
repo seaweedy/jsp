@@ -43,10 +43,22 @@ lazy-init : 빈 생성 시기 셜정
  => server start => 스프링 빈 초기화 => 
  
  만약 lazy-init 속성을 true로 설정할 경우
- 해당 빈이 필요할 때 생성 => 스프링 컨테이너 생성시 초기화 시가간이 개척된다			
+ 해당 빈이 필요할 때 생성 => 스프링 컨테이너 생성시 초기화 시간이 개척된다			
  
- ** 오라쿨 now level locking
+ ** 오라클 now level locking
  
  init-method, destroy-method : 스프링 빈 생성, 소멸 시 초기화, 리소스 해제시 사용
  factory bean, factory-method : 생성자가 아닌 factory 객체를 통해 객체를 생성할 때
  depends-on : 스프링 빈 생성시 이전에 반드시 생성이 되어야하는 다른 스프링 빈을 명시
+ 
+ 어노테이션은 주석 (메타데이터)이다.
+ 어노테이션 자체가 강제성을 갖지는 않음.
+ 단 프레임워크에서 해당 어노테이션 해석하고, 프레임워크에서 자체적으로 관리할 때 사용
+ 
+ component scan의 대상 어노테이션
+ @Controller, @service, @Repository, @Component
+ 
+ java 스프링 컨테이너 설정
+ xml => java 파일 생성
+ 1. class @Configureation : spring 컨테이너에게 해당 java 파일이 스프링 설정파일임을 암시
+ 2. method @Bean : 해당 메서드에서 리턴하는 객체가 스프링 빈으로 등록
