@@ -20,6 +20,10 @@
 	<!-- STDOUT를 참조 -->
        <appender-ref ref="STDOUT" />
    </logger> 
+   
+   <logger name="org.springframework" level="debug">
+       <appender-ref ref="STDOUT" />
+   </logger> 
 <!--    <root level="DEBUG"> -->
 <!--        <appender-ref ref="STDOUT" /> -->
 <!--    </root> -->
