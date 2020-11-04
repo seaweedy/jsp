@@ -12,5 +12,5 @@
 	
 	<!-- @Resource, @Autowired, @Inject : 해당 어노테이션을 작업해주는 스프링 설정 파일
 		BeanPostProcessor  -->
-	<context:annotation-config></context:annotation-config>
+	<context:annotation-config/>
 </beans>

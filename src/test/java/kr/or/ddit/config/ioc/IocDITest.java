@@ -81,7 +81,7 @@ public class IocDITest {
 		
 		/***When***/
 		BoardServiceI boardService = context.getBean("boardService", BoardServiceI.class);
-
+		
 		BoardVo boardVo = boardService.getBoard(1);
 		
 		/***Then***/

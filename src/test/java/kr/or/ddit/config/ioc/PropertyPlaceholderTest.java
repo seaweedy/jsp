@@ -27,7 +27,7 @@ public class PropertyPlaceholderTest {
 		/***When***/
 
 		/***Then***/
-		assertEquals("team4_202005", dbProperty.getUser());
+		assertEquals("lmh", dbProperty.getUser());
 		assertEquals("java", dbProperty.getPass());
 	}
 
