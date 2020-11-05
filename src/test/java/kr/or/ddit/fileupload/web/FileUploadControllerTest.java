@@ -29,6 +29,7 @@ public class FileUploadControllerTest extends WebTestConfig {
 	public void uploadTest() throws Exception {
 		
 		InputStream is = getClass().getResourceAsStream("/kr/or/ddit/upload/sally.png");
+		
 //		FileInputStream fis = new FileInputStream("D:\\A_TeachingMaterial\\6.JspSpring\\workspace\\spring\\src\\main\\resources\\kr\\or\\ddit\\upload\\sally.png");
 		MockMultipartFile file = new MockMultipartFile("file", "sally.png", "image/png", is);
 		
