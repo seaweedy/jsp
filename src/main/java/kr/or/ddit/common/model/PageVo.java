@@ -18,6 +18,10 @@ public class PageVo {
 		this.page = page;
 		this.pageSize = pageSize;
 	}
+
+	public String getMsg() {
+		return "Hello, java";
+	}
 	
 	public int getPage() {
 		return page;

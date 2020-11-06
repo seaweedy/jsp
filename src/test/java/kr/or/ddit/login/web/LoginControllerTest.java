@@ -53,7 +53,7 @@ public class LoginControllerTest extends WebTestConfig {
 				.param("pass", "brownPassFail")).andReturn(); // 결과를 리턴
 		
 		ModelAndView mav = result.getModelAndView(); // 결과의 model 및 view
-		assertEquals("login/view", mav.getViewName()); // 왜 널이야...
+		assertEquals("login/view", mav.getViewName()); 
 		assertEquals("fail", mav.getModel().get("msg"));
 	}
 	
