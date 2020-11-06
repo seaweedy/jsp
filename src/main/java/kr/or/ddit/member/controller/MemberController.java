@@ -10,18 +10,22 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.PageVo;
+import kr.or.ddit.member.model.JSRMemberVo;
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.MemberVoValidator;
 import kr.or.ddit.member.service.MemberService;
 
 @RequestMapping("/member")
@@ -68,8 +72,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/regist")
-	public String insertMember(MemberVo memberVo, Model model,
-			@RequestPart("file")@RequestParam(name="file",required = false) MultipartFile file) {
+	public String insertMember(Model model,@Valid MemberVo memberVo,BindingResult br,@RequestParam(name="file",required = false) MultipartFile file) {
+//	public String insertMember(Model model,@Valid JSRMemberVo memberVo,BindingResult br,@RequestParam(name="file",required = false) MultipartFile file) {
+		
+		new MemberVoValidator().validate(memberVo, br);
+		
+		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
+		if(br.hasErrors()) {
+			return "member/insertMemberForm";
+		}
 		
 		logger.debug("memberVo : {} ",memberVo);
 		logger.debug("file : {}" , file.getOriginalFilename());
@@ -169,11 +180,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/update")
-	public String updateMember(MemberVo memberVo,@RequestPart("file")@RequestParam(name = "file", required = false) MultipartFile file) {
-		if(file == null) {
-			memberService.updateMember(memberVo);
-			return "member/member";
-		}else {
+	public String updateMember(MemberVo memberVo,
+			@RequestParam(name = "file", required = false) MultipartFile file) {
+		if(file.getSize() > 0) {
 			// 확장자 추출
 			int index = file.getOriginalFilename().lastIndexOf(".");
 			String extension = file.getOriginalFilename().substring(index + 1); // jpg
@@ -190,6 +199,9 @@ public class MemberController {
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
+			memberService.updateMember(memberVo);
+			return "member/member";
+		}else {
 			memberService.updateMember(memberVo);
 			return "member/member";
 		}
