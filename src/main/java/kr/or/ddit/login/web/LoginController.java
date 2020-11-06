@@ -35,15 +35,32 @@ public class LoginController {
 	
 	@ModelAttribute("rangers")
 	public List<String> ranger(){
-		
 		logger.debug("ranger()");
-		
 		List<String> rangers = new ArrayList<String>();
 		rangers.add("brown");
 		rangers.add("sally");
 		rangers.add("cony");
 		
 		return rangers;
+	}
+	
+	// http://localhost/login/json
+	// ranger() => Model 객체에 rangers라는 이름의 속성이 저장됨 => json()
+	// Model 객체 속성이 존재(rangers)
+	@RequestMapping("/json")
+	public String json() {
+		return "jsonView"; // <bean id="jsonView" class="MappingJackson2Json"/>
+		
+		// view reslover를 두 개 등록
+		// 1. beanNameViewResolver
+		//		viewName해당하는 빈이 있는지 찾음
+		//		만약 해당하는 빈이(View) 있으면 해당 view 결과를 생성
+		//		beanNameViewResolver에서 찾지 못했을 경우
+		// 2. internalResourceViewResolver
+		//		prefix, surfix 설정에 따라 /WEB-INf/views/jsonView.jsp로 포워딩
+		//		internalResourceViewResolver는 view이름에 해당하는
+		//		자원이 존재하는지 , 존재하지 않은지 체크하지 않고 무조건 forwarding
+		//		** viewResolver 우선순위를 가장 후순위로 미뤄야함
 	}
 	
 	// localhost/login/view 요청시 처리되는 메서드

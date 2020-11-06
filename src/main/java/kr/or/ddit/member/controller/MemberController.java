@@ -118,28 +118,28 @@ public class MemberController {
 		return "redirect:/member/list";
 	}
 	
-	@RequestMapping("/profile")
-	public String viewProfile(String userid, HttpServletResponse response) throws IOException {
-		
-		MemberVo memberVo = memberService.getMember(userid);
-		
-		// 프로필 출력
-		if(memberVo.getFilename() != null) {
-			FileInputStream fis = new FileInputStream(memberVo.getFilename());
-			ServletOutputStream sos = response.getOutputStream();
-			
-			byte[] buffer = new byte[512];
-			
-			while (fis.read(buffer) != -1) {
-				sos.write(buffer);
-			}
-			
-			fis.close();
-			sos.flush();
-			sos.close();
-		}
-		return null;
-	}
+//	@RequestMapping("/profile")
+//	public String viewProfile(String userid, HttpServletResponse response) throws IOException {
+//		
+//		MemberVo memberVo = memberService.getMember(userid);
+//		
+//		// 프로필 출력
+//		if(memberVo.getFilename() != null) {
+//			FileInputStream fis = new FileInputStream(memberVo.getFilename());
+//			ServletOutputStream sos = response.getOutputStream();
+//			
+//			byte[] buffer = new byte[512];
+//			
+//			while (fis.read(buffer) != -1) {
+//				sos.write(buffer);
+//			}
+//			
+//			fis.close();
+//			sos.flush();
+//			sos.close();
+//		}
+//		return null;
+//	}
 	
 	@RequestMapping("/profile/download")
 	public String downloadProfile(HttpServletResponse response, String userid ) throws IOException {
