@@ -101,10 +101,10 @@ public class MemberController {
 			// 프로필파일 vo 등록
 			memberVo.setRealfilename(file.getOriginalFilename());
 			String uploadFileName = UUID.randomUUID().toString() + "." + extension;
-			memberVo.setFilename("d:\\upload\\" +uploadFileName);
+			memberVo.setFilename("d:\\profile\\" +uploadFileName);
 			
 			// 파일 업로드
-			File uploadFile = new File("d:\\upload\\" + uploadFileName);
+			File uploadFile = new File("d:\\profile\\" + uploadFileName);
 			try {
 				file.transferTo(uploadFile); // 업로드하는 메서드
 			} catch (IllegalStateException | IOException e) {
@@ -141,35 +141,35 @@ public class MemberController {
 //		return null;
 //	}
 	
-	@RequestMapping("/profile/download")
-	public String downloadProfile(HttpServletResponse response, String userid ) throws IOException {
-		response.setContentType("image/png");
-		
-		MemberVo memberVo = memberService.getMember(userid);
-		
-		// response content-type 설정 (파일 다운로드를 위한 구문)
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + memberVo.getRealfilename() + "\"");
-		response.setContentType("application/octet-stream");
-		
-		// 경로 확인 후 파일 입출력을 통해 응답생성
-		// 파일 읽기
-		// 응답 생성
-		if(memberVo.getFilename() != null) {
-			FileInputStream fis = new FileInputStream(memberVo.getFilename());
-			ServletOutputStream sos = response.getOutputStream();
-			
-			byte[] buffer = new byte[512];
-			
-			while (fis.read(buffer) != -1) {
-				sos.write(buffer);
-			}
-			
-			fis.close();
-			sos.flush();
-			sos.close();
-		}
-		return null;
-	}
+//	@RequestMapping("/profile/download")
+//	public String downloadProfile(HttpServletResponse response, String userid ) throws IOException {
+//		response.setContentType("image/png");
+//		
+//		MemberVo memberVo = memberService.getMember(userid);
+//		
+//		// response content-type 설정 (파일 다운로드를 위한 구문)
+//		response.setHeader("Content-Disposition", "attachment; filename=\"" + memberVo.getRealfilename() + "\"");
+//		response.setContentType("application/octet-stream");
+//		
+//		// 경로 확인 후 파일 입출력을 통해 응답생성
+//		// 파일 읽기
+//		// 응답 생성
+//		if(memberVo.getFilename() != null) {
+//			FileInputStream fis = new FileInputStream(memberVo.getFilename());
+//			ServletOutputStream sos = response.getOutputStream();
+//			
+//			byte[] buffer = new byte[512];
+//			
+//			while (fis.read(buffer) != -1) {
+//				sos.write(buffer);
+//			}
+//			
+//			fis.close();
+//			sos.flush();
+//			sos.close();
+//		}
+//		return null;
+//	}
 	
 	@RequestMapping("/updateForm")
 	public String updateMemberView(String userid, Model model) {
@@ -190,10 +190,10 @@ public class MemberController {
 			// 프로필파일 vo 등록
 			memberVo.setRealfilename(file.getOriginalFilename());
 			String uploadFileName = UUID.randomUUID().toString() + "." + extension;
-			memberVo.setFilename("d:\\upload\\" +uploadFileName);
+			memberVo.setFilename("d:\\profile\\" +uploadFileName);
 			
 			// 파일 업로드
-			File uploadFile = new File("d:\\upload\\" + uploadFileName);
+			File uploadFile = new File("d:\\profile\\" + uploadFileName);
 			try {
 				file.transferTo(uploadFile); // 업로드하는 메서드
 			} catch (IllegalStateException | IOException e) {

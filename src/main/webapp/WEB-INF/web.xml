@@ -31,7 +31,7 @@
   
   <!-- 스프링 자식 - dispatcherServlet을 통해 생성 : controller -->
   <servlet>
-  	<servlet-name>dispatcherServlet</servlet-name>
+  	<servlet-name>dispatcherServlet</servlet-name><!-- 고정 -->
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   	<init-param>
   		<param-name>contextConfigLocation</param-name> <!-- 고정 -->

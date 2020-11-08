@@ -16,6 +16,7 @@
 	</context:component-scan>
 	
 	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"/>
+	<bean id="profileDownloadView" class="kr.or.ddit.mvc.view.ProfileDownloadView"/>
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"></property>
