@@ -26,7 +26,7 @@ public class ExcelDownloadView extends AbstractView{
 		response.setContentType("application/vnd.ms-excel; UTF-8");
 		
 		// 첨부파일을 암시
-		response.setHeader("Content-Dispostion", "attachment; filename=test.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
 		
 		// poi라이브러리를 이용하여 excel 파일 생성
 		Workbook workbook = new XSSFWorkbook();
@@ -53,7 +53,7 @@ public class ExcelDownloadView extends AbstractView{
 		
 		// 파일에 입력
 		OutputStream os = response.getOutputStream();
-		workbook.write(os); // 기존의 방식보다 간단하진
+		workbook.write(os); // 기존의 방식보다 간단하다
 		
 		os.flush();
 		os.close();

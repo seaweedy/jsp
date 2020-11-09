@@ -1,17 +1,13 @@
 package kr.or.ddit.member.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,11 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.PageVo;
-import kr.or.ddit.member.model.JSRMemberVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.MemberVoValidator;
 import kr.or.ddit.member.service.MemberService;
@@ -57,18 +51,20 @@ public class MemberController {
 		model.addAttribute("memberPageList", map.get("memberList"));
 		model.addAttribute("pages", map.get("pages"));
 		
-		return "member/memberList";
+//		return "tiles.memberList"; // definition name을 따라간다.
+		return "tiles/member/memberListContent"; // definition name을 따라간다.
 	}
 	
 	@RequestMapping("/get")
 	public String getMember(String userid, Model model) {
 		model.addAttribute("memberVo",memberService.getMember(userid));
-		return "member/member";
+//		return "member/member";
+		return "tiles/member/member";
 	}
 	
 	@RequestMapping("/registform")
 	public String insertMemberView() {
-		return "member/insertMemberForm";
+		return "tiles/member/insertMemberFormContent";
 	}
 	
 	@RequestMapping("/regist")
@@ -79,7 +75,7 @@ public class MemberController {
 		
 		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
 		if(br.hasErrors()) {
-			return "member/insertMemberForm";
+			return "tiles/member/insertMemberFormContent";
 		}
 		
 		logger.debug("memberVo : {} ",memberVo);
@@ -89,7 +85,7 @@ public class MemberController {
 		
 		for (MemberVo member : memberList) {
 			if(memberVo.getUserid().equals(member.getUserid())) { // 중복된 아이디 입력
-				return "member/insertMemberForm"; // 실패했을 때
+				return "tiles/member/insertMemberFormContent"; // 실패했을 때
 			}
 		}
 		
@@ -113,7 +109,9 @@ public class MemberController {
 			
 			// 회원등록
 			memberService.insertMember(memberVo);
-			
+		}else {
+			logger.debug("프로필 없이 등록: {},{}" , memberVo.getFilename(), memberVo.getRealfilename());
+			memberService.insertMember(memberVo);
 		}
 		return "redirect:/member/list";
 	}
@@ -176,7 +174,7 @@ public class MemberController {
 		MemberVo memberVo = memberService.getMember(userid);
 		
 		model.addAttribute("memberVo", memberVo);
-		return "member/updateMemberForm";
+		return "tiles/member/updateMemberFormContent";
 	}
 	
 	@RequestMapping("/update")
@@ -200,10 +198,10 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			memberService.updateMember(memberVo);
-			return "member/member";
+			return "tiles/member/member";
 		}else {
 			memberService.updateMember(memberVo);
-			return "member/member";
+			return "tiles/member/member";
 		}
 	}
 }
