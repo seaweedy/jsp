@@ -22,6 +22,7 @@
 </script>
 <div class="container-fluid">
 	<div class="row">
+		updateMemberFormContent.jsp
 		<div class="col-sm-8 blog-main">
 			<form id="frm" class="form-horizontal" role="form"
 				action="${cp }/member/update" method="post"
