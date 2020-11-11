@@ -84,14 +84,14 @@ public class LoginController {
 	//		 : jsp/servlet 기반의 request 역할을 담당
 	
 	@RequestMapping(path="/process",params = {"pass"})
-	public String process(String userid, String pass, MemberVo memberVo, @RequestBody String body, HttpSession session,
+	public String process(String userid, String pass, MemberVo memberVo, HttpSession session,
 			Model model, 
 			@RequestParam(name="email",required = false,
 			defaultValue = "brown@line.kr")String user_id) {
 		logger.debug("LoginController.process() {} / {} / {}", userid, pass, memberVo);
 		logger.debug("user_id : {}" , user_id);
 		
-		logger.debug("body : {}" , body);
+//		logger.debug("body : {}" , body);
 		
 		MemberVo dbMember = memberService.getMember(userid);
 		logger.debug("LoginController.dbMember : {}", dbMember);

@@ -12,7 +12,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,6 +29,7 @@ import kr.or.ddit.WebTestConfig;
 
 
 public class LoginControllerTest extends WebTestConfig {
+	private static final Logger logger = LoggerFactory.getLogger(LoginControllerTest.class);
 
 	@Test
 	public void getViewTest() throws Exception {
@@ -37,12 +41,14 @@ public class LoginControllerTest extends WebTestConfig {
 	// 로그인 요청 테스트(정상적인 경우)
 	@Test
 	public void processSuccessTest() throws Exception {
-		mockMvc.perform(post("/login/process")
+		mockMvc.perform(post("/login/process").contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("userid", "brown")
 				.param("pass","brownPass"))
 		.andExpect(status().is(200))
 		.andExpect(view().name("main"))
 		.andExpect(model().attributeExists("to_day"));
+		logger.debug("상태 : {}",status().is(200));
+		logger.debug("뷰 : {}",view().name("main"));
 	}
 	
 	// 로그인 요청 테스트(실패)

@@ -23,13 +23,6 @@ public class MemberService implements MemberServiceI  {
 	@Resource(name="MemberDao")
 	private MemberDaoI memberDao;
 	
-	@Resource(name="sqlSessionTemplate")
-	private SqlSessionTemplate sqlSession;
-	
-	public MemberService(){
-//		memberDao = new MemberDao();
-	}
-
 	@Override
 	public MemberVo getMember(String userid) {
 		return memberDao.getMember(userid);
@@ -43,11 +36,11 @@ public class MemberService implements MemberServiceI  {
 	@Override
 	public Map<String, Object> selectMemberPageList(PageVo pageVo) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("memberList", memberDao.selectMemberPageList(sqlSession,pageVo));
+		map.put("memberList", memberDao.selectMemberPageList(pageVo));
 		
 		// 15건, 페이지 사이즈를 7로 가정했을 때 3개의 페이지가 나와야한다.
 		// 15/7은 
-		int totalCnt = memberDao.selectMemberTotalCnt(sqlSession);
+		int totalCnt = memberDao.selectMemberTotalCnt();
 		int pages = (int)Math.ceil((double)totalCnt/pageVo.getPageSize());
 		
 		map.put("pages", pages);

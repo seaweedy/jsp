@@ -28,7 +28,7 @@ public class MemberControllerTest extends WebTestConfig{
 	public void getMemberTest() throws Exception {
 		mockMvc.perform(get("/member/get")
 				.param("userid","brown"))
-		.andExpect(view().name("member/member"));
+		.andExpect(view().name("tiles/member/member"));
 	}
 	
 	@Test
@@ -59,7 +59,7 @@ public class MemberControllerTest extends WebTestConfig{
 	public void updateMemberViewTest() throws Exception {
 		mockMvc.perform(get("/member/updateForm")
 				.param("userid", "brown"))
-		.andExpect(view().name("member/updateMemberForm"));
+		.andExpect(view().name("tiles/member/updateMemberFormContent"));
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.param("addr2","test")
 				.param("zipcode","12345"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("member/member"));
+		.andExpect(view().name("tiles/member/member"));
 	}
 
 }
