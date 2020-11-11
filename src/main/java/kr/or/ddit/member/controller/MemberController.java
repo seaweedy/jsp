@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.ddit.common.model.PageVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.MemberVoValidator;
-import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.service.MemberServiceI;
 
 @RequestMapping("/member")
 @Controller
@@ -28,7 +29,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Resource(name="MemberService")
-	private MemberService memberService;
+	private MemberServiceI memberService;
 	
 	@RequestMapping("/list")
 	public String selectMemberPageList(Model model,
@@ -99,14 +100,14 @@ public class MemberController {
 	public String getMemberAjax(String userid, Model model) {
 		model.addAttribute("memberVo",memberService.getMember(userid));
 //		return "member/member";
-		return "tiles/member/AjaxMember";
+		return "tiles/member/memberAjax";
 	}
 	
-	@RequestMapping("/getHTML")
+	@RequestMapping("/getAjaxHTML")
 	public String getMemberHTML(String userid, Model model) {
 		model.addAttribute("memberVo",memberService.getMember(userid));
 //		return "member/member";
-		return "member/memberHTML";
+		return "member/memberAjax";
 	}
 	
 	@RequestMapping("/registform")

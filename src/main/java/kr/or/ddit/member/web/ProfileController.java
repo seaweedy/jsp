@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.service.MemberServiceI;
 
 @Controller
 public class ProfileController {
 	@Resource(name="MemberService")
-	private MemberService memberService;
+	private MemberServiceI memberService;
 	
 	@RequestMapping("/profileImgView")
 	public String profile(String userid,Model model) throws IOException {

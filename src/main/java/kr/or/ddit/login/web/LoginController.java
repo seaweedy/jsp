@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.service.MemberServiceI;
 
 // @WebServlet 혹은 web.xml url-mapping을 통해 url 등록
 
@@ -32,7 +32,7 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Resource(name="MemberService")
-	private MemberService memberService;
+	private MemberServiceI memberService;
 	
 	@ModelAttribute("rangers")
 	public List<String> ranger(){
