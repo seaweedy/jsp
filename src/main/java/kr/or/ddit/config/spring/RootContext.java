@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 	</context:component-scan>
  */
 //@ImportResource({"classpath:kr/or/ddit/config/spring/aop-context.xml"})
-@Import({AopContext.class, DataSourceContext.class, TransactionContext.class})
+//@Import({AopContext.class, DataSourceContext.class, TransactionContext.class})
 @Configuration
 @ComponentScan(basePackages ={"kr.or.ddit"}, useDefaultFilters = false,
 			includeFilters = {

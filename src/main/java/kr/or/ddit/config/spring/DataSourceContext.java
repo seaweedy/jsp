@@ -38,6 +38,8 @@ public class DataSourceContext {
 		dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
+		dataSource.setMaxTotal(2);
+		dataSource.setMaxIdle(2);
 		return dataSource;
 	}
 	/*

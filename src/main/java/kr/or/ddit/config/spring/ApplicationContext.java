@@ -121,6 +121,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter{
 	</bean>
 	 */
 	
+	@Bean
 	public TilesViewResolver tilesViewResolver() {
 		TilesViewResolver tilesViewResolver = new TilesViewResolver();
 		tilesViewResolver.setOrder(0);
@@ -143,6 +144,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter{
 		<property name="suffix" value=".jsp"/>
 	</bean> 
 	 */
+	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver internalResourceViewResolver =
 				new InternalResourceViewResolver();
@@ -168,6 +170,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter{
 	<bean id="localeResolver"
 	class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/> 
 	 */
+	@Bean
 	public SessionLocaleResolver sessionLocaleResolver() {
 		return new SessionLocaleResolver();
 	}
