@@ -49,14 +49,14 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-				<form id="frm"class="form-horizontal" role="form" action="${cp }/memberUpdate" method="post" enctype="multipart/form-data">
+				<form id="frm"class="form-horizontal" role="form" action="${cp }/member/update" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 							<img alt="" src="${cp }/profileImg?userid=${memberVo.userid }"/>
 							<input type="hidden" name ="filename" value="${memberVo.filename }"/>
 							<input type="hidden" name ="realfilename" value="${memberVo.realfilename }"/>
-							<input type="file" name ="realFilename"/>
+							<input type="file" name ="file"/>
 						</div>
 					</div>
 					
